@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprilia Dwi Cristyana - Work Portfolio</title>
+    <!-- Font Space Grotesk (Judul) dan Be Vietnam Pro (Teks Biasa) -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES & FONT SETUP */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+       body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background: linear-gradient(to bottom, #F5F4F1 0%, #E5EEDB 100%);
+    color: #555453;
+    overflow-x: hidden;
+    padding-top: 80px;
+    position: relative;
+}
+
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: #292929; /* WARNA JUDUL */
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* UTILITY: MENYEMBUNYIKAN SCROLLBAR */
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+
+        /* HEADER (SAMA DENGAN HOME.HTML) */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 60px;
+            background: rgba(255, 255, 255, 0.8); /* Putih transparan */
+            backdrop-filter: blur(5px); /* Efek frosted glass */
+            position: fixed; /* Header Fixed */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer; /* Menunjukkan bahwa ini dapat diklik */
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background: #FF6B9D;
+            border-radius: 50%;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555453;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #292929;
+        }
+
+        .contact-btn {
+            background: #000;
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        /* PROJECT LIST STYLES */
+        .project-list-section {
+            padding: 80px 60px;
+        }
+        
+        .project-list-section h1 {
+            font-size: 56px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        /* FILTER SECTION */
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid #E8E8E8;
+            background: #fff;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            color: #555453;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: #292929;
+            color: #fff;
+            border-color: #292929;
+        }
+
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 kolom di desktop */
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            text-align: center;
+            padding: 24px;
+            border-radius: 20px;
+            background: #fff; /* Warna background card putih/off-white */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; /* Tambah opacity transition */
+            cursor: pointer;
+        }
+        
+        .project-card.hidden {
+            display: none;
+            opacity: 0;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-card .project-subtitle {
+            font-size: 13px;
+            color: #555453;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .project-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .project-card-image {
+            width: 240px;
+            height: 320px;
+            border-radius: 9999px; /* Oval Vertikal Penuh */
+            background-color: #1a1a1a; 
+            margin: 0 auto 16px; /* Tengahkan gambar */
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.15);
+        }
+        
+        /* Warna Placeholder Gambar */
+        .img-1 { background-image: url('https://placehold.co/240x320/F0EFE9/333333?text=BinDawood'); }
+        .img-2 { background-image: url('https://placehold.co/240x320/DDEECC/333333?text=Unititive'); }
+        .img-3 { background-image: url('https://placehold.co/240x320/F0F0F0/333333?text=EXCash'); }
+        .img-4 { background-image: url('https://placehold.co/240x320/B0E0E6/111111?text=SIMASI'); }
+        .img-5 { background-image: url('https://placehold.co/240x320/F08080/111111?text=SPOSC'); }
+        .img-6 { background-image: url('https://placehold.co/240x320/E5C0C0/111111?text=FinPlan'); }
+        .img-7 { background-image: url('https://placehold.co/240x320/C4D4E8/111111?text=BlogSite'); }
+        .img-8 { background-image: url('https://placehold.co/240x320/E8C4C4/111111?text=Portfoliov1'); }
+
+
+        .project-card .category {
+            display: inline-block;
+            background: #E8E8E8;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #555453;
+            margin-top: 16px;
+        }
+
+        /* FOOTER STYLES (SAMA DENGAN HOME.HTML) */
+        footer {
+            background: #212529; /* Background Dark */
+            color: #fff;
+            padding: 60px 60px 0px; 
+        }
+
+        .footer-main-content { 
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+            padding-bottom: 60px;
+        }
+        
+        .footer-section {
+            flex-grow: 1; 
+            flex-basis: 0; 
+            max-width: 350px;
+        }
+
+        .footer-section.action-card-wrapper { 
+            flex-grow: 1.2; 
+            max-width: 400px;
+        }
+        
+        .footer-section h3 {
+            color: #999; 
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #fff; 
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #6AFFC0;
+        }
+        
+        .contact-detail-group {
+            margin-bottom: 25px;
+        }
+
+        .contact-detail-group h4 {
+            color: #999;
+            font-size: 12px;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .contact-detail-group p {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+
+        .footer-action-card {
+            background: #2A2E35;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transform: translateY(-10px);
+        }
+
+        .footer-action-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .footer-action-card h4::before {
+            content: '⭐';
+            margin-right: 8px;
+        }
+
+        .footer-action-card p {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .download-cv-btn {
+            background: #497B6A; 
+            color: #fff;
+            padding: 12px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        
+        .download-cv-btn:hover {
+            background: #5A8C7B;
+        }
+
+        .footer-bottom-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            border-top: 1px solid #444;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-copyright {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .footer-copyright .logo-text {
+            font-size: 18px;
+            font-family: 'Space Grotesk', sans-serif;
+            color: white;
+            font-weight: 700;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-icon {
+            background: transparent;
+            width: 32px;
+            height: 32px;
+            color: #999;
+            border-radius: 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s;
+        }
+
+        .social-icon:hover {
+            color: white;
+        }
+
+        /* RESPONSIVE STYLES */
+        @media (max-width: 1024px) {
+            header,
+            .project-list-section,
+            footer {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+            .project-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 kolom di tablet */
+            }
+            
+            .footer-main-content {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .footer-section {
+                flex-basis: 45%;
+                max-width: 45%;
+                margin-bottom: 30px;
+            }
+            
+            .footer-section.action-card-wrapper {
+                flex-basis: 100%;
+                max-width: 100%;
+                order: -1; 
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            header {
+                padding: 15px 20px;
+            }
+            nav {
+                display: none;
+            }
+            
+            .project-list-section {
+                padding: 40px 20px;
+            }
+            .project-list-section h1 {
+                font-size: 40px;
+                margin-bottom: 40px;
+            }
+            .project-grid {
+                grid-template-columns: 1fr; /* 1 kolom di mobile */
+                gap: 30px;
+            }
+            
+            .project-card-image {
+                width: 200px;
+                height: 280px;
+            }
+            
+            .footer-main-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .footer-bottom-bar {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .footer-copyright {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .footer-section {
+                flex-basis: 100%;
+                max-width: 100%;
+            }
+            
+            .filter-container {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                flex-wrap: nowrap;
+            }
+            
+            .filter-btn {
+                flex-shrink: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SCRIPT UNTUK FILTER -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            function filterProjects(category) {
+                projectCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    const isVisible = category === 'all' || cardCategory === category;
+                    
+                    // Gunakan setTimeout untuk memberikan transisi opacity
+                    if (isVisible) {
+                        card.style.display = 'block';
+                        setTimeout(() => card.style.opacity = '1', 10);
+                    } else {
+                        card.style.opacity = '0';
+                        setTimeout(() => card.style.display = 'none', 300); // Sembunyikan setelah transisi selesai
+                    }
+                });
+            }
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const category = button.getAttribute('data-filter');
+
+                    // Update tombol aktif
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    filterProjects(category);
+                });
+            });
+
+            // Set filter default ke 'all' saat dimuat
+            filterProjects('all');
+        });
+    </script>
+    
+    <!-- HEADER -->
+    <header>
+        <!-- LINK LOGO KE HOME.HTML -->
+        <a href="index.html" class="logo">
+            <div class="logo-dot"></div>
+            <span>APRILIA</span>
+        </a>
+     <div class="header-nav">
+         
+            <a href="index.html#contact" class="contact-btn">Let's Talk</a>
+        </div>
+    </header>
+
+    <!-- PROJECT LIST SECTION -->
+    <section class="project-list-section">
+        <h1>All Creative Works</h1>
+        
+        <!-- FILTER KATEGORI -->
+        <div class="filter-container hide-scrollbar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="ui-ux">UI/UX Design</button>
+            <button class="filter-btn" data-filter="web-developer">Web Developer</button>
+            <button class="filter-btn" data-filter="mobile-developer">Mobile Developer</button>
+            <button class="filter-btn" data-filter="wordpress-developer">WordPress Developer</button>
+        </div>
+        
+        <div class="project-grid">
+            
+            <!-- Item 1: BinDawood (UI/UX) -->
+            <a href="project_detail.html" class="project-card" data-category="ui-ux">
+                <span class="project-subtitle">Hajj/Umrah information system</span>
+                <h3>BinDawood</h3>
+                <div class="project-card-image img-1"></div>
+                <span class="category">UI/UX Design</span>
+            </a>
+            
+            <!-- Item 2: Unititive (UI/UX) -->
+            <a href="#" class="project-card" data-category="ui-ux">
+                <span class="project-subtitle">Clothing screen printing services</span>
+                <h3>Unititive</h3>
+                <div class="project-card-image img-2"></div>
+                <span class="category">UI/UX Design</span>
+            </a>
+            
+            <!-- Item 3: EXCash (Web Developer) -->
+            <a href="#" class="project-card" data-category="web-developer">
+                <span class="project-subtitle">Grocery store cashier</span>
+                <h3>EXCash</h3>
+                <div class="project-card-image img-3"></div>
+                <span class="category">Website Development</span>
+            </a>
+            
+            <!-- Item 4: SIMASI (Mobile Developer) -->
+            <a href="#" class="project-card" data-category="mobile-developer">
+                <span class="project-subtitle">Smart Inventory System</span>
+                <h3>SIMASI</h3>
+                <div class="project-card-image img-4"></div>
+                <span class="category">Mobile Development</span>
+            </a>
+
+            <!-- Item 5: SPOSC (UI/UX) -->
+            <a href="#" class="project-card" data-category="ui-ux">
+                <span class="project-subtitle">Mobile Point of Sales</span>
+                <h3>SPOSC</h3>
+                <div class="project-card-image img-5"></div>
+                <span class="category">UI/UX Design</span>
+            </a>
+            
+            <!-- Item 6: FinPlan (UI/UX) -->
+            <a href="#" class="project-card" data-category="ui-ux">
+                <span class="project-subtitle">Financial Dashboard</span>
+                <h3>FinPlan</h3>
+                <div class="project-card-image img-6"></div>
+                <span class="category">UI/UX Design</span>
+            </a>
+
+            <!-- Item 7: Blog Site (WordPress Developer) -->
+            <a href="#" class="project-card" data-category="wordpress-developer">
+                <span class="project-subtitle">Personal Blog & News Portal</span>
+                <h3>Tech Digest</h3>
+                <div class="project-card-image img-7"></div>
+                <span class="category">WordPress Development</span>
+            </a>
+            
+            <!-- Item 8: Portfolio v1 (Web Developer) -->
+            <a href="#" class="project-card" data-category="web-developer">
+                <span class="project-subtitle">My First Portfolio Site</span>
+                <h3>Portfolio V1</h3>
+                <div class="project-card-image img-8"></div>
+                <span class="category">Website Development</span>
+            </a>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-main-content">
+            <!-- Column 1: COMPANY -->
+            <div class="footer-section">
+                <h3>COMPANY</h3>
+                <ul>
+                    <li><a href="index.html#">About Me</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html#skills">Skills</a></li>
+                    <li><a href="index.html#experience">Experiences</a></li>
+                </ul>
+            </div>
+            
+            <!-- Column 2: NEED HELP? -->
+            <div class="footer-section contact-links">
+                <h3>NEED HELP?</h3>
+                <div class="contact-detail-group">
+                    <h4>CALL ME DIRECTLY</h4>
+                    <p>081336730560</p>
+                </div>
+                <div class="contact-detail-group">
+                    <h4>CALL ME DIRECTLY</h4>
+                    <p>tsoaprilia@gmail.com</p>
+                </div>
+            </div>
+            
+            <!-- Column 3: Action Card -->
+            <div class="footer-section action-card-wrapper">
+                <div class="footer-action-card">
+                    <h4>⭐ Come On</h4>
+                    <p>Want to know more about me?</p>
+                    <a href="https://example.com/aprilia_cv.pdf" target="_blank" class="download-cv-btn">Download CV</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom Bar -->
+        <div class="footer-bottom-bar">
+            <div class="footer-copyright">
+                <span class="logo-text">APRILIA</span>
+                <span style="color: #999;">© copyright2024</span>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon">👻</a>
+                <a href="#" class="social-icon">🎧</a>
+                <a href="#" class="social-icon">spotify</a>
+                <a href="#" class="social-icon">github</a>
+                <a href="#" class="social-icon">linkedin</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
