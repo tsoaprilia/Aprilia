@@ -15,7 +15,7 @@
         }
 body {
     font-family: 'Be Vietnam Pro', sans-serif;
-    background: linear-gradient(to bottom, #F5F4F1 0%, #E5EEDB 100%);
+    background: linear-gradient(to bottom, #ffffff 0%, #E5EEDB 100%);
     color: #555453;
     overflow-x: hidden;
     padding-top: 80px;
@@ -199,35 +199,40 @@ body {
             font-size: 24px;
         }
 
-        /* SECTION 2 - PROFILE & SKILLS (DIPERBAIKI) */
-        .profile-section {
-            padding: 80px 60px;
-            display: flex;
-            flex-direction: column; /* Mengatur flow utama ke bawah */
-            align-items: center; /* Rata tengah konten section */
-        }
+       /* SECTION 2 - PROFILE & SKILLS */
+.profile-section {
+    padding: 80px 60px; /* Pertahankan padding luar section */
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
 
-        /* Container Atas (Profile) - Layout Rata Tengah Vertikal dan Horizontal */
-        .profile-container {
-            display: flex;
-            gap: 60px;
-            align-items: center; /* Rata tengah vertikal */
-            justify-content: center; /* Rata tengah horizontal */
-            max-width: 1000px; 
-            width: 100%;
-            padding: 40px; 
-            margin-bottom: 60px; /* Pisahkan dari skills cards */
-        }
+/* Container Atas (Profile) */
+.profile-container {
+    /* Hapus padding, atur alignment agar konten ke kiri */
+    padding: 0; /* <<< PERUBAHAN UTAMA: Hapus padding */
+    gap: 60px;
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; /* <<< PERUBAHAN: Rata kiri */
+    max-width: 1000px; 
+    width: 100%;
+    margin-bottom: 60px;
+}
 
-        .profile-image-wrapper {
-            flex-shrink: 0;
-            width: 250px; 
-            height: 350px; 
-            /* Menghilangkan semua border/radius/masking */
-            box-shadow: none; 
-            border-radius: 0; 
-            background-color: transparent; 
-        }
+       .profile-image-wrapper {
+    flex-shrink: 0;
+    width: 250px; 
+    height: 350px; 
+    box-shadow: none; 
+    border-radius: 0; 
+    background-color: transparent; 
+    
+    /* <<< PERUBAHAN UTAMA UNTUK MENEMPEL KE CARD PERTAMA: */
+    /* Pindahkan gambar ke bawah dan sedikit ke kanan agar menempel */
+    transform: translateY(60px); /* Geser ke bawah 60px */
+    margin-bottom: 60px; /* Kompensasi agar konten di bawah tidak tertimpa */
+}
 
         .profile-image-wrapper img {
             width: 100%;
@@ -298,6 +303,18 @@ body {
     transition: all 0.3s ease;
 }
 
+   .view-all-btn1 {
+    display: inline-block;
+    background: #023c1b;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
 /* Hover effect (membesar + glow) */
 .view-all-btn:hover {
     background: #000;
@@ -328,10 +345,42 @@ body {
     left: 130%;
 }
 
+/* Hover effect (membesar + glow) */
+.view-all-btn1:hover {
+    background: #011f12;
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* Shine effect */
+.view-all-btn1::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(
+        120deg, 
+        rgba(255, 255, 255, 0.0) 0%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        rgba(255, 255, 255, 0.0) 100%
+    );
+    transform: skewX(-20deg);
+    transition: 0.5s;
+}
+
+/* Shine bergerak saat hover */
+.view-all-btn1:hover::after {
+    left: 130%;
+}
+
 
 
         /* Container Bawah (Skills Cards) */
         .skills-cards {
+            z-index: 1;
+            margin-top: -80px;
             display: flex;
             gap: 24px;
             justify-content: center; /* Rata tengah cards */
@@ -497,15 +546,20 @@ body {
         
         /* Specific Project Background Images (digunakan sebagai placeholder PNG) */
         .project-bindawood {
-            background-image: url('https://placehold.co/240x320/F0EFE9/333333?text=Image+1'); 
+            background-image: url('bindawood.png'); 
         }
         .project-unititive {
-            background-image: url('https://placehold.co/240x320/DDEECC/333333?text=Image+2'); 
+            background-image: url('exvecto.png'); 
         }
         .project-excash {
-            background-image: url('https://placehold.co/240x320/F0F0F0/333333?text=Image+3'); 
+            background-image: url('excash.png'); 
         }
-
+         .project-artomia{
+            background-image: url('artomia.png'); 
+        }
+         .project-simkesia{
+            background-image: url('simkesiaa.png'); 
+        }
         .project-card .category {
             display: inline-block;
             background: #E8E8E8;
@@ -719,7 +773,9 @@ body {
         .skill-tag:nth-child(18) { background: #E5FFEF; animation-delay: 0.95s; }
         .skill-tag:nth-child(19) { background: #F5E5EF; animation-delay: 1s; }
         .skill-tag:nth-child(20) { background: #EFF5E5; animation-delay: 1.05s; }
-
+        .skill-tag:nth-child(21) { background: #FFE5E5; animation-delay: 0.1s; }
+        .skill-tag:nth-child(22) { background: #E5F5FF; animation-delay: 0.15s; }
+        .skill-tag:nth-child(23) { background: #FFF5E5; animation-delay: 0.2s; }
 
         /* SECTION 6 - EXPERIENCE */
         .experience-section {
@@ -813,8 +869,8 @@ body {
         }
 
         .experience-card h3.card-title {
-            font-size: 16px; /* Ukuran lebih kecil untuk "Competition Experience" */
-            font-weight: 600;
+            font-size: 18px; /* Ukuran lebih kecil untuk "Competition Experience" */
+            font-weight: 700;
             margin-bottom: 20px;
             color: #292929;
             text-transform: uppercase;
@@ -822,7 +878,7 @@ body {
         }
         
         .experience-item-title {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 600;
             color: #292929;
         }
@@ -1092,7 +1148,23 @@ body {
         .download-cv-btn:hover {
             background: #5A8C7B;
         }
+.download-portfolio-btn {
+            /* New solid button style */
+            background: #747b49; /* Solid dark teal/green from the image */
+            color: #fff;
+            padding: 12px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+            transition: background 0.3s;
+            margin-top: 0; 
+        }
 
+        .download-portfolio-btn:hover {
+            background: #898c5a;
+        }
         /* Footer Bottom Bar */
         .footer-bottom-bar {
             display: flex;
@@ -1415,7 +1487,7 @@ body {
             <a href="#projects">Projects</a>
             <a href="#skills">Skills</a>
             <a href="#experience">Experience</a>
-            <a href="#contact" class="contact-btn">Let's Talk</a>
+            <a href="projects.html" class="contact-btn">View Projects</a>
         </nav>
         <div class="logo logo-dot"></div> <!-- Tombol menu di mobile (placeholder) -->
     </header>
@@ -1468,10 +1540,12 @@ body {
                         <span></span>
                     </span>
                 </h2>
-                <p>I have worked on more than 20+ digital projects and won more than 5+ national to international business & design competitions.</p>
+                <p>I have worked on more than 30+ digital projects and won more than 5+ national to international business & design competitions.</p>
                 
                 <!-- TOMBOL BARU: VIEW ALL PROJECTS -->
                 <a href="projects.html" class="view-all-btn">View All Projects</a>
+                <a href="https://drive.google.com/file/d/10s3JSb8YOyUac920z8SdEpIVH5dFi8ht/view?usp=sharing" target="_blank" class="view-all-btn1">Portfolio Summary</a>
+
             </div>
         </div>
 
@@ -1507,7 +1581,7 @@ body {
         <div class="project-cards-wrapper">
             <div class="project-cards hide-scrollbar" id="projectCards">
                 <!-- Project 1: BinDawood (Haji/Umrah) -->
-                <a href="project_detail.html" class="project-card">
+                <a href="bindawood.html" class="project-card">
                     <span class="project-subtitle">Hajj/Umrah information system</span>
                     <h3>BinDawood</h3>
                     <div class="project-card-image project-bindawood">
@@ -1517,9 +1591,9 @@ body {
                 </a>
                 
                 <!-- Project 2: Unititive (Clothing) -->
-                <a href="#" class="project-card">
+                <a href="exvecto.html" class="project-card">
                     <span class="project-subtitle">Clothing screen printing services</span>
-                    <h3>Unititive</h3>
+                    <h3>EXVECTO</h3>
                     <div class="project-card-image project-unititive">
                         <!-- Gambar placeholder PNG tanpa teks -->
                     </div>
@@ -1527,33 +1601,33 @@ body {
                 </a>
                 
                 <!-- Project 3: EXCash (Kasir) -->
-                <a href="#" class="project-card">
-                    <span class="project-subtitle">Grocery store cashier</span>
+                <a href="excash.html" class="project-card">
+                    <span class="project-subtitle">Store cashier offline</span>
                     <h3>EXCash</h3>
                     <div class="project-card-image project-excash">
                         <!-- Gambar placeholder PNG tanpa teks -->
                     </div>
-                    <span class="category">Website Development</span>
+                    <span class="category">Mobile Development</span>
                 </a>
                 
                 <!-- Project 4: Project Tambahan 1 -->
-                <a href="#" class="project-card">
+                <a href="artomia.html" class="project-card">
                     <span class="project-subtitle">Smart Inventory System</span>
-                    <h3>SIMASI</h3>
-                    <div class="project-card-image" style="background-image: url('https://placehold.co/240x320/B0E0E6/111111?text=Image+4');">
+                    <h3>artomia</h3>
+                     <div class="project-card-image project-artomia">
                         <!-- Gambar placeholder PNG tanpa teks -->
                     </div>
-                    <span class="category">Mobile Development</span>
+                    <span class="category">Website Development</span>
                 </a>
 
                  <!-- Project 5: Project Tambahan 2 -->
-                <a href="#" class="project-card">
-                    <span class="project-subtitle">Mobile Point of Sales</span>
-                    <h3>SPOSC</h3>
-                    <div class="project-card-image" style="background-image: url('https://placehold.co/240x320/F08080/111111?text=Image+5');">
+                <a href="simkesia.html" class="project-card">
+                    <span class="project-subtitle">maternal and child health</span>
+                    <h3>SIMKESIA</h3>
+                    <div class="project-card-image project-simkesia">
                         <!-- Gambar placeholder PNG tanpa teks -->
                     </div>
-                    <span class="category">UI/UX Design</span>
+                    <span class="category">Website Development</span>
                 </a>
             </div>
         </div>
@@ -1564,17 +1638,7 @@ body {
         <div class="dev-scroll-container">
             <!-- Item 1: Design -->
             <div class="dev-item">
-                <div class="dev-mockups">
-                    <div class="phone-mockup">
-                        <div class="phone-mockup-screen"></div>
-                    </div>
-                    <div class="phone-mockup">
-                        <div class="phone-mockup-screen"></div>
-                    </div>
-                    <div class="phone-mockup">
-                        <div class="phone-mockup-screen"></div>
-                    </div>
-                </div>
+                 <img src="project11.png" style=" width: 40%;">
                 <div class="dev-text">
                     <h2>Making mobile and website designs.</h2>
                     <p>Creating beautiful and functional designs that provide exceptional user experiences.</p>
@@ -1588,19 +1652,9 @@ body {
 
             <!-- Item 2: Development (dengan row-reverse) -->
             <div class="dev-item">
-                <div class="dev-mockups">
-                    <div class="phone-mockup">
-                        <div class="phone-mockup-screen"></div>
-                    </div>
-                    <div class="phone-mockup">
-                        <div class="phone-mockup-screen"></div>
-                    </div>
-                    <div class="phone-mockup">
-                        <div class="phone-mockup-screen"></div>
-                    </div>
-                </div>
+                 <img src="project2.png" style=" width: 40%;">
                 <div class="dev-text">
-                    <h2>mobile and website development</h2>
+                    <h2>Mobile and Website Development</h2>
                     <p>Transforming designs into fully functional applications using modern technologies.</p>
                     <ul>
                         <li>I do product design in UI/UX to satisfy users</li>
@@ -1637,6 +1691,9 @@ body {
             <span class="skill-tag">React</span>
             <span class="skill-tag">Laravel</span>
             <span class="skill-tag">Frontend Development</span>
+            <span class="skill-tag">Flutter</span>
+            <span class="skill-tag">Wordpress Development</span>
+            <span class="skill-tag">Agile Development</span>
         </div>
     </section>
 
@@ -1658,47 +1715,70 @@ body {
                 <h3 class="card-title">COMPETITION EXPERIENCE</h3>
                 <ul>
                     <li>
-                        <span class="experience-item-title">Design Concept UI/UX App Mobile</span>
-                        <span class="period">BUMN Go Digital (2024) - Finalist</span>
-                    </li>
-                    <li>
-                        <span class="experience-item-title">UI/UX Design Concept Web App</span>
-                        <span class="period">Startup Incubation Program (2024) - 1st Winner</span>
-                    </li>
-                    <li>
-                        <span class="experience-item-title">Business Innovation Plan</span>
-                        <span class="period">National Business Plan Competition (2023) - Top 5</span>
-                    </li>
-                    <li>
-                        <span class="experience-item-title">Mobile App Development Project</span>
-                        <span class="period">Digital Creative Challenge (2023) - Finalist</span>
-                    </li>
-                    <li>
-                        <span class="experience-item-title">Web Design Competition</span>
-                        <span class="period">Regional Tech Summit (2022) - 2nd Winner</span>
-                    </li>
+    <span class="experience-item-title">TOP 10 DIGI SOCIAL FEST</span>
+    <span class="period">2021</span>
+</li>
+<li>
+    <span class="experience-item-title">Favorite Champion of IRESTECH FUN COMPETITION</span>
+    <span class="period">2021</span>
+</li>
+<li>
+    <span class="experience-item-title">1st Place ISINDO UI/UX COMPETITION</span>
+    <span class="period">2021</span>
+</li>
+<li>
+    <span class="experience-item-title">3rd Place in UI/UX DESIGN IDN IF FEST</span>
+    <span class="period">2022</span>
+</li>
+<li>
+    <span class="experience-item-title">1st Place Gemastik-ICT Business Development</span>
+    <span class="period">2023</span>
+</li>
+<li>
+    <span class="experience-item-title">Fasilkom Fest-ADIKTIF Business Plan Competition Finalists</span>
+    <span class="period">2023</span>
+</li>
+<li>
+    <span class="experience-item-title">Silver Medal Malaysia Invention and Innovation Expo</span>
+    <span class="period">2023</span>
+</li>
+
+
                 </ul>
             </div>
             <!-- Card 2: JOB & FIELD WORK EXPERIENCE -->
             <div class="experience-card">
-                <h3 class="card-title">JOB & FIELD WORK EXPERIENCE</h3>
+                <ul><li>
+    <span class="experience-item-title">Student Creativity Program (PKM) Funding Recipients</span>
+    <span class="period">April 2024 - Sept 2024</span>
+</li>
+<li>
+    <span class="experience-item-title">1st Place Web Development National Competition Silogy Expo</span>
+    <span class="period">July - August 2025</span>
+</li>
+<li>
+    <span class="experience-item-title">1st Place Web Development – Technology Innovative Challenge 8.0</span>
+    <span class="period">June - August 2025</span>
+</li>
+<li>
+    <span class="experience-item-title">3rd Place E-Government KMIPN</span>
+    <span class="period">July - October 2025</span>
+</li></ul>
+               <br> <h3 class="card-title">JOB & FIELD WORK EXPERIENCE</h3>
                 <ul>
                     <li>
-                        <span class="experience-item-title">UX Designer & Mobile Developer</span>
-                        <span class="period">Dinas Perdagangan Kota Gresik [2024-2025]</span>
-                    </li>
-                    <li>
-                        <span class="experience-item-title">Mobile Developer Kementrian BUMN</span>
-                        <span class="period">MBKM Kampus Merdeka Startup Incubator [2024]</span>
-                    </li>
-                    <li>
-                        <span class="experience-item-title">Frontend Developer Intern</span>
-                        <span class="period">Tech Startup X [2023]</span>
-                    </li>
-                    <li>
-                        <span class="experience-item-title">Freelance UI/UX Consultant</span>
-                        <span class="period">Various Clients [2022 - Present]</span>
-                    </li>
+    <span class="experience-item-title">PT Webcare Digital Indonesia</span>
+    <span class="period">July 2024 - August 2025</span>
+</li>
+<li>
+    <span class="experience-item-title">Startup Slash Studio</span>
+    <span class="period">August 2022 - September 2023</span>
+</li>
+<li>
+    <span class="experience-item-title">Internship – PT Vokasi Indonesia Sejahtera</span>
+    <span class="period">June - August 2021</span>
+</li>
+
                 </ul>
             </div>
         </div>
@@ -1709,13 +1789,14 @@ body {
         <p>Trusted by global brands, here are my world partners.</p>
         <div class="logos-scroll hide-scrollbar">
             <div class="logos-container">
-                <span class="logo-item">AMAZON</span>
-                <span class="logo-item">⚫ SHOPEE</span>
-                <span class="logo-item">AIRBNB</span>
-                <span class="logo-item">AMD</span>
-                <span class="logo-item">DROPBOX</span>
-                <span class="logo-item">MERCY</span>
-                <span class="logo-item">AMAZON</span>
+                <span class="logo-item">EXCASH</span>
+                <span class="logo-item">ANAK RANTAU</span>
+                <span class="logo-item">EXVECTO</span>
+                <span class="logo-item">SOBAT BUMI</span>
+                <span class="logo-item">SIMKESIA</span>
+                <span class="logo-item">BINDAWOOD</span>
+                <span class="logo-item">UNITIVE</span>
+
             </div>
         </div>
     </section>
@@ -1771,9 +1852,9 @@ body {
             <!-- Column 3: Action Card -->
             <div class="footer-section action-card-wrapper">
                 <div class="footer-action-card">
-                    <h4>⭐ Come On</h4>
+                    <h4>⭐ ⭐ ⭐ ⭐</h4>
                     <p>Want to know more about me?</p>
-                    <a href="https://example.com/aprilia_cv.pdf" target="_blank" class="download-cv-btn">Download CV</a>
+                    <a href="https://drive.google.com/file/d/1Du1CgpfIMb7Uvn0edynC27qqQQRAcWg0/view?usp=sharing" target="_blank" class="download-cv-btn">Download CV</a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Proyek - Exvecto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES & FONT SETUP */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background: #FFFBF5;
+            color: #555453;
+            overflow-x: hidden;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        h1, h2, h3, h4, .project-title {
+            font-family: 'Space Grotesk', sans-serif;
+            color: #292929;
+        }
+        
+        p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+        
+        ul li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        /* UTILITY: MENYEMBUNYIKAN SCROLLBAR */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+
+        /* HEADER (Putih Transparan - SAMA DENGAN HOME) */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 60px;
+            background: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(5px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #292929;
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background: #FF6B9D;
+            border-radius: 50%;
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .header-nav a {
+            text-decoration: none;
+            color: #555453;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .header-nav a:hover {
+            color: #292929;
+        }
+        
+        .header-nav .contact-btn {
+            background: #000;
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 20px;
+        }
+        
+        /* SECTION 1 - HERO DETAIL & CAROUSEL CONTAINER (Background Hitam) */
+        .hero-detail-container {
+            background: #1E1E1E; /* Background Hitam/Gelap */
+            color: #494949;
+            padding: 80px 60px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-detail-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .project-title {
+            color: #ffffff;
+            font-size: 56px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        
+        .project-description-text {
+            color: #f0f0f0;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Metadata (Horizontal Layout) */
+        .project-metadata {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-bottom: 80px;
+        }
+
+        .meta-item h4 {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 8px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .meta-item p {
+            font-size: 18px;
+            font-weight: 600;
+            color: #f0f0f0;
+            margin: 0;
+        }
+
+        /* CAROUSEL GALLERY */
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 40px;
+            padding: 80px 0; 
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .carousel-item {
+            flex-shrink: 0;
+            width: 300px; 
+            height: 600px; 
+            background: #333;
+            border-radius: 40px;
+            scroll-snap-align: center; 
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            transform: scale(0.8);
+            opacity: 0.7;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .carousel-item.active {
+            transform: scale(1); 
+            opacity: 1;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* SECTION 2 - CASE STUDY CONTENT */
+        .case-study-section {
+            padding: 80px 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .case-study-title {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .content-block {
+            margin-bottom: 60px;
+            display: flex;
+            gap: 40px;
+        }
+        
+        .content-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: #696969;
+            flex-shrink: 0;
+            width: 100px;
+            text-align: right;
+            line-height: 1;
+        }
+
+        .content-text {
+            flex: 1;
+        }
+
+        .content-text h3 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .content-text h3 span {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #888;
+            display: block;
+            margin-top: 5px;
+        }
+        
+        /* SECTION 3 - DESIGN SYSTEM */
+        .design-system-section {
+            padding: 60px 60px 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .design-system-images-gallery {
+            text-align: center;
+        }
+
+        .design-system-images {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            justify-items: center;
+            margin-top: 40px;
+        }
+
+        .design-system-images img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* FOOTER ACTION BAR */
+        .footer-action-bar {
+            background: #2D333A;
+            padding: 80px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+        }
+        
+        .footer-action-text {
+            text-align: left;
+        }
+        
+        .footer-action-bar h2 {
+            color: #fff;
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .footer-action-bar p {
+            color: #D3D3D3;
+            margin-bottom: 0;
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .footer-action-bar .action-btn {
+            background: #496F5B; 
+            color: #fff;
+            padding: 12px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+        
+        .footer-action-bar .action-btn:hover {
+            background: #5C8374;
+        }
+
+        /* RESPONSIVE STYLES */
+        @media (max-width: 1024px) {
+            header, .hero-detail-container, .case-study-section, .design-system-section, .footer-action-bar {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+            .project-title {
+                font-size: 48px;
+            }
+            .carousel-item {
+                width: 250px;
+                height: 500px;
+            }
+            .project-metadata {
+                gap: 40px;
+            }
+            .footer-action-bar h2 {
+                font-size: 40px;
+            }
+            .footer-action-bar p {
+                font-size: 20px;
+            }
+            
+            .design-system-images img {
+                max-width: 600px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            header {
+                padding: 15px 20px;
+            }
+            .header-nav {
+                display: none;
+            }
+
+            .hero-detail-container {
+                padding: 40px 20px 0;
+            }
+            
+            .project-title {
+                font-size: 36px;
+            }
+            .project-description-text {
+                font-size: 14px;
+            }
+            .project-metadata {
+                flex-direction: column;
+                gap: 20px;
+                margin-bottom: 40px;
+                align-items: flex-start;
+                text-align: left;
+            }
+            .carousel-track {
+                padding: 20px 0;
+            }
+            .carousel-item {
+                width: 70vw;
+                height: 45vh;
+            }
+            
+            .case-study-section {
+                padding: 40px 20px;
+            }
+            .content-block {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .content-number {
+                text-align: left;
+                font-size: 40px;
+                width: auto;
+            }
+            .content-text h3 {
+                font-size: 24px;
+            }
+            
+            .design-system-images {
+                 grid-template-columns: 1fr;
+            }
+            .design-system-images img {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            .footer-action-bar {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .footer-action-text {
+                text-align: center;
+            }
+
+            .footer-action-bar h2 {
+                font-size: 36px;
+            }
+            .footer-action-bar p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            <div class="logo-dot"></div>
+            <span>APRILIA</span>
+        </a>
+    
+        <div class="header-nav">
+            <a href="projects.html">All Projetcs</a>
+            <a href="index.html#contact" class="contact-btn">Let's Talk</a>
+        </div>
+    </header>
+
+    <section class="hero-detail-container">
+        <div class="hero-detail-content">
+            <h1 class="project-title">Exvecto: POS & Inventory Management</h1>
+            <p class="project-description-text"> Redesign and development of an integrated Point of Sale (POS) and inventory management application, specifically tailored to meet the unique needs of clothing printing shops, such as custom T-shirts, hoodies, hats, and merchandise.</p>
+
+            <div class="project-metadata">
+                <div class="meta-item">
+                    <h4>Date</h4>
+                    <p>2023</p>
+                </div>
+                <div class="meta-item">
+                    <h4>Client</h4>
+                    <p>Exvecto</p>
+                </div>
+                <div class="meta-item">
+                    <h4>Category</h4>
+                    <p>UI/UX Design & POS System</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="carousel-container">
+            <div class="carousel-track hide-scrollbar" id="carouselTrack">
+                <div class="carousel-item">
+                    <img src="exvecto3.png" alt="Screenshot Grafik Penjualan">
+                </div>
+                <div class="carousel-item">
+                    <img src="exvecto2.png" alt="Screenshot Halaman Pembayaran">
+                </div>
+                <div class="carousel-item active">
+                    <img src="exvecto1.png" alt="Screenshot Dashboard (Active)">
+                </div>
+                <div class="carousel-item">
+                    <img src="exvecto4.png" alt="Screenshot Detail Produk">
+                </div>
+                <div class="carousel-item">
+                    <img src="exvecto5.png" alt="Screenshot Fitur Barcode Scanner">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="case-study-section">
+        <h2 class="case-study-title">Tantangan & Solusi Proyek</h2>
+        
+        <div class="content-block">
+            <div class="content-number">01</div>
+            <div class="content-text">
+                <h3>Client <span>About the Printing Shop</span></h3>
+                <p>Exvecto is a service business for printing and selling custom clothing (T-shirts, hoodies, hats) and merchandise. They required a system to efficiently manage rapid sales processes (POS), custom orders, and the stock of raw materials (blank T-shirts, ink, etc.).</p>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <div class="content-number">02</div>
+            <div class="content-text">
+                <h3>Problem <span>Key Challenges Faced</span></h3>
+                <p>
+The main challenges were managing dual inventory (finished goods and raw materials), complex sales reports due to custom orders, and transaction speed at the cashier. The old system did not support product tracking by design nor non-cash payments (barcode).</p>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <div class="content-number">03</div>
+            <div class="content-text">
+                <h3>Solusi <span>Implemented Design</span></h3>
+                <ul>
+                    <li>Detailed Inventory Management: Separating the stock of raw materials and finished products, including a recipe/component feature for custom orders. </li>
+
+ <li>Interactive Sales Charts: Providing a dashboard with daily/monthly sales charts to visually monitor the shop's performance. </li>
+
+ <li>Fast Barcode Payment & POS: Integrating a barcode scanning feature for efficient payment and product recording, speeding up the checkout process at the cashier.
+                   </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="design-system-section">
+        <div class="design-system-images-gallery">
+            <div class="design-system-images">
+                <img src="exvectoo1.png" alt="Key Screen Aplikasi Exvecto: Dashboard dan Laporan">
+            </div>
+        </div>
+    </section>
+    
+    <section class="footer-action-bar">
+        <div class="footer-action-text">
+            <h2>Ready to see your next miracle?</h2>
+            <p>Let's start exploring.</p>
+        </div>
+        <a href="excash.html" class="action-btn">Next Project</a>
+    </section>
+
+    <script>
+        // FUNGSI UNTUK MENGATUR CAROUSEL AGAR ITEM DI TENGAH MEMBESAR
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('carouselTrack');
+            const items = track.querySelectorAll('.carousel-item');
+            
+            // Fungsi untuk update kelas aktif berdasarkan item yang paling dekat ke tengah viewport track
+            const updateActiveItem = () => {
+                const trackScroll = track.scrollLeft;
+                const trackCenter = track.clientWidth / 2;
+
+                items.forEach(item => {
+                    const itemCenter = item.offsetLeft + item.clientWidth / 2;
+                    const diff = Math.abs(itemCenter - trackScroll - trackCenter);
+                    
+                    if (diff < item.clientWidth * 0.45) { 
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            };
+
+            // Event listener untuk scroll pada track
+            track.addEventListener('scroll', updateActiveItem);
+            
+            // Inisialisasi posisi scroll dan active item
+            setTimeout(() => {
+                 // Cari item yang seharusnya aktif saat dimuat (misalnya item ke-4/index 3)
+                 const centerItem = items[3]; 
+                 // Hitung posisi scroll agar item tengah berada di tengah viewport
+                 const scrollPosition = centerItem.offsetLeft - (track.clientWidth / 2) + (centerItem.clientWidth / 2);
+                 track.scrollLeft = scrollPosition;
+                 updateActiveItem();
+            }, 100);
+
+            // Perbaikan untuk mengatasi resize
+            window.addEventListener('resize', () => {
+                 setTimeout(() => {
+                     const activeItem = track.querySelector('.carousel-item.active') || items[3];
+                     const scrollPosition = activeItem.offsetLeft - (track.clientWidth / 2) + (activeItem.clientWidth / 2);
+                     track.scrollLeft = scrollPosition;
+                     updateActiveItem();
+                 }, 50);
+            });
+        });
+    </script>
+</body>
+</html>

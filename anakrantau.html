@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Proyek - anakrantau</title>
+    <!-- Font Plus Jakarta Sans (sesuai gambar) dan Space Grotesk --><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES & FONT SETUP */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+     body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background: #f8feff;
+    color: #555453;
+    overflow-x: hidden;
+    padding-top: 80px;
+    position: relative;
+}
+
+
+
+        h1, h2, h3, h4, .project-title {
+            font-family: 'Space Grotesk', sans-serif;
+            color: #292929;
+        }
+        
+        p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0; /* Hapus padding default */
+            margin-bottom: 20px;
+        }
+        
+        ul li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        /* UTILITY: MENYEMBUNYIKAN SCROLLBAR */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+
+        /* HEADER (Putih Transparan - SAMA DENGAN HOME) */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 60px;
+            background: rgba(255, 255, 255, 0.8); /* Putih transparan */
+            backdrop-filter: blur(5px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #292929; /* Warna logo gelap */
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background: #FF6B9D;
+            border-radius: 50%;
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .header-nav a {
+            text-decoration: none;
+            color: #555453;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .header-nav a:hover {
+            color: #292929;
+        }
+        
+        .header-nav .contact-btn {
+            background: #000;
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 20px;
+        }
+        
+        /* SECTION 1 - HERO DETAIL & CAROUSEL CONTAINER (Background Putih) */
+        .hero-detail-container {
+            background: #E8FBFF; /* Background Putih */
+            color: #494949;
+            padding: 80px 60px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-detail-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .project-title {
+            color: #3a3939;
+            font-size: 56px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        
+        .project-description-text {
+            color: #393737;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Metadata (Horizontal Layout) */
+        .project-metadata {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-bottom: 80px;
+        }
+
+        .meta-item h4 {
+            font-size: 14px;
+            color: #4b4a4a;
+            margin-bottom: 8px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .meta-item p {
+            font-size: 18px;
+            font-weight: 600;
+            color: #262525;
+            margin: 0;
+        }
+
+        /* CAROUSEL GALLERY */
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 40px;
+            padding: 80px 0; /* Padding vertikal untuk efek scale */
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            /* Scrollbar disembunyikan via hide-scrollbar class */
+        }
+        
+        .carousel-item {
+            flex-shrink: 0;
+            width: 300px; 
+            height: 600px; 
+            border-radius: 20px;
+            scroll-snap-align: center; 
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            transform: scale(0.8); /* Default kecil */
+            opacity: 0.7;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        .carousel-item.active {
+            transform: scale(1); /* Item aktif membesar */
+            opacity: 1;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* SECTION 2 - CASE STUDY CONTENT */
+        .case-study-section {
+            padding: 80px 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .case-study-title {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .content-block {
+            margin-bottom: 60px;
+            display: flex;
+            gap: 40px;
+        }
+        
+        .content-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: #696969;
+            flex-shrink: 0;
+            width: 100px;
+            text-align: right;
+            line-height: 1;
+        }
+
+        .content-text {
+            flex: 1;
+        }
+
+        .content-text h3 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .content-text h3 span {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #888;
+            display: block;
+            margin-top: 5px;
+        }
+        
+        /* SECTION 3 - DESIGN SYSTEM */
+        .design-system-section {
+            padding: 60px 60px 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .design-system-images-gallery {
+            text-align: center;
+        }
+
+        /* --- PERUBAHAN UTAMA UNTUK LAYOUT VERTIKAL GAMBAR --- */
+        .design-system-images {
+            display: grid;
+            grid-template-columns: 1fr; /* Hanya satu kolom */
+            gap: 30px; /* Jarak antar gambar */
+            justify-items: center; /* Tengahkan gambar */
+            margin-top: 40px;
+        }
+
+        .design-system-images img {
+            width: 100%; /* Ambil lebar penuh container di desktop */
+            max-width: 800px; /* Batasi lebar maksimal */
+            height: auto; /* Biarkan tinggi menyesuaikan */
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        /* ---------------------------------------------------- */
+        
+        /* FOOTER ACTION BAR (SAMA DENGAN GAMBAR TERAKHIR) */
+        .footer-action-bar {
+            background: #2D333A; /* Warna dark green/abu-abu gelap dari gambar */
+            padding: 80px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+        }
+        
+        .footer-action-text {
+            text-align: left;
+        }
+        
+        .footer-action-bar h2 {
+            color: #fff;
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .footer-action-bar p {
+            color: #D3D3D3;
+            margin-bottom: 0;
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .footer-action-bar .action-btn {
+            background: #496F5B; 
+            color: #fff;
+            padding: 12px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+        
+        .footer-action-bar .action-btn:hover {
+            background: #5C8374;
+        }
+
+        /* RESPONSIVE STYLES */
+        @media (max-width: 1024px) {
+            header, .hero-detail-container, .case-study-section, .design-system-section, .footer-action-bar {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+            .project-title {
+                font-size: 48px;
+            }
+            .carousel-item {
+                width: 250px;
+                height: 500px;
+            }
+            .project-metadata {
+                gap: 40px;
+            }
+            .footer-action-bar h2 {
+                font-size: 40px;
+            }
+            .footer-action-bar p {
+                font-size: 20px;
+            }
+            
+            /* Design System Tablet Fix */
+            .design-system-images img {
+                max-width: 600px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            header {
+                padding: 15px 20px;
+            }
+            .header-nav {
+                display: none;
+            }
+
+            .hero-detail-container {
+                padding: 40px 20px 0;
+            }
+            
+            .project-title {
+                font-size: 36px;
+            }
+            .project-description-text {
+                font-size: 14px;
+            }
+            .project-metadata {
+                flex-direction: column;
+                gap: 20px;
+                margin-bottom: 40px;
+                align-items: flex-start;
+                text-align: left;
+            }
+            .carousel-track {
+                padding: 20px 0;
+            }
+            .carousel-item {
+                width: 70vw;
+                height: 45vh;
+            }
+            
+            .case-study-section {
+                padding: 40px 20px;
+            }
+            .content-block {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .content-number {
+                text-align: left;
+                font-size: 40px;
+                width: auto;
+            }
+            .content-text h3 {
+                font-size: 24px;
+            }
+            
+            /* Design System Mobile Fix */
+            .design-system-images {
+                 grid-template-columns: 1fr;
+            }
+            .design-system-images img {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            .footer-action-bar {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .footer-action-text {
+                text-align: center;
+            }
+
+            .footer-action-bar h2 {
+                font-size: 36px;
+            }
+            .footer-action-bar p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            <div class="logo-dot"></div>
+            <span>APRILIA</span>
+        </a>
+    
+        <div class="header-nav">
+            <a href="projects.html">All Projetcs</a>
+            <a href="index.html#contact" class="contact-btn">Let's Talk</a>
+        </div>
+    </header>
+
+    <!-- SECTION 1: HERO, METADATA & CAROUSEL -->
+    <section class="hero-detail-container">
+        <div class="hero-detail-content">
+            <h1 class="project-title">Anak Rantau</h1>
+            <p class="project-description-text">anakRantau is an infrastructure information application that helps users—especially students or workers living far from home—find accurate and complete data about boarding houses and essential nearby facilities through a user-friendly mobile platform.</p>
+
+            <!-- Metadata Proyek -->
+            <div class="project-metadata">
+                <div class="meta-item">
+                    <h4>Date</h4>
+                    <p>2024</p>
+                </div>
+                <div class="meta-item">
+                    <h4>Client</h4>
+                    <p>anakrantau</p>
+                </div>
+                <div class="meta-item">
+                    <h4>Category</h4>
+                    <p>UI/UX Design</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CAROUSEL GALLERY -->
+        <div class="carousel-container">
+            <div class="carousel-track hide-scrollbar" id="carouselTrack">
+                <!-- Gunakan gambar mobile mockup. Tambahkan class active pada item tengah -->
+              
+                <div class="carousel-item">
+                    <img src="anak6.png" alt="Screenshot Aplikasi 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="anak9.png" alt="Screenshot Aplikasi 2">
+                </div>
+                <div class="carousel-item active">
+                    <img src="anak7.png" alt="Screenshot Aplikasi 3 (Active)">
+                </div>
+                   <div class="carousel-item">
+                    <img src="anak5.png" alt="Screenshot Aplikasi 1">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: CASE STUDY CONTENT -->
+    <section class="case-study-section">
+        <h2 class="case-study-title">How We Find Problems</h2>
+        
+        <div class="content-block">
+            <div class="content-number">01</div>
+            <div class="content-text">
+                <h3>The Client <span>Who we worked with</span></h3>
+                <p>anakRanatau is a name in infrastructure application development. anakRantau provides various information on boarding houses, as well as the surrounding facilities.
+
+anakRantau application turns your Apple or Android device into a place that provides infrastructure information, especially boarding houses. Offering ease of use, accurate information, and a live dashboard. anakRantau will make your life so much easier.</p>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <div class="content-number">02</div>
+            <div class="content-text">
+                <h3>Problems <span>The main obstacles we faced</span></h3>
+                <p>Overseas children from out of town find it difficult to find information about much-needed day-to-day infrastructure. The infrastructure can be in the form of boarding houses, laundry, places to eat, markets and others. </p>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <div class="content-number">03</div>
+            <div class="content-text">
+                <h3>Solutions <span>How we solved the challenges</span></h3>
+                <p>Creating a place to rent boarding houses and a place for a collection of infrastructure information needed in everyday life around the boarding house.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: DESIGN SYSTEM VISUALS (Layout Vertikal) -->
+    <section class="design-system-section">        
+        <div class="design-system-images-gallery">
+            <div class="design-system-images">
+                <!-- 3 Gambar PNG Placeholder Vertikal -->
+                <img src="anaak1.png" alt="Design System Visual 1">
+                <img src="anaak2.png" alt="Design System Visual 2">
+            </div>
+        </div>
+    </section>
+    
+    <!-- FOOTER ACTION BAR (SAMA DENGAN GAMBAR TERAKHIR) -->
+    <section class="footer-action-bar">
+        <div class="footer-action-text">
+            <h2>Ready to see your next miracle?</h2>
+            <p>Let's start exploring.</p>
+        </div>
+        <a href="sobat.html" class="action-btn">Next Project</a>
+    </section>
+
+    <script>
+        // FUNGSI UNTUK MENGATUR CAROUSEL AGAR ITEM DI TENGAH MEMBESAR
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('carouselTrack');
+            const items = track.querySelectorAll('.carousel-item');
+            
+            // Fungsi untuk update kelas aktif berdasarkan item yang paling dekat ke tengah viewport track
+            const updateActiveItem = () => {
+                const trackScroll = track.scrollLeft;
+                const trackCenter = track.clientWidth / 2;
+
+                items.forEach(item => {
+                    const itemCenter = item.offsetLeft + item.clientWidth / 2;
+                    const diff = Math.abs(itemCenter - trackScroll - trackCenter);
+                    
+                    if (diff < item.clientWidth * 0.45) { 
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            };
+
+            // Event listener untuk scroll pada track
+            track.addEventListener('scroll', updateActiveItem);
+            
+            // Inisialisasi posisi scroll dan active item
+            setTimeout(() => {
+                 // Cari item yang seharusnya aktif saat dimuat (misalnya item ke-3/index 2)
+                 const centerItem = items[2];
+                 // Hitung posisi scroll agar item tengah berada di tengah viewport
+                 const scrollPosition = centerItem.offsetLeft - (track.clientWidth / 2) + (centerItem.clientWidth / 2);
+                 track.scrollLeft = scrollPosition;
+                 updateActiveItem();
+            }, 100);
+
+            // Perbaikan untuk mengatasi resize
+            window.addEventListener('resize', () => {
+                 setTimeout(() => {
+                    const activeItem = track.querySelector('.carousel-item.active') || items[2];
+                    const scrollPosition = activeItem.offsetLeft - (track.clientWidth / 2) + (activeItem.clientWidth / 2);
+                    track.scrollLeft = scrollPosition;
+                    updateActiveItem();
+                 }, 50);
+            });
+        });
+    </script>
+</body>
+</html>
