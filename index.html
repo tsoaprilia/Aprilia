@@ -543,7 +543,24 @@ body {
             text-align: center; 
             padding: 0; 
         }
-        
+        @media (max-width: 768px) {
+            /* ... other mobile styles ... */
+            .project-card {
+                width: 250px; 
+            }
+            
+            /* **PERBAIKAN UTAMA DI SINI** */
+            .project-card-image {
+                /* Reduced dimensions for mobile */
+                width: 180px; /* Reduced width */
+                height: 250px; /* Reduced height */
+                /* Center the smaller image */
+                margin: 0 auto 16px;
+                /* Optional: Adjust the very tall oval radius to make it less extreme, or keep it */
+                /* border-radius: 120px / 9999px; */
+            }
+            /* ... other mobile styles ... */
+        }
         /* Specific Project Background Images (digunakan sebagai placeholder PNG) */
         .project-bindawood {
             background-image: url('bindawood.png'); 
